@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>출입명부 키오스크</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<!-- VENDOR CSS -->
+	<link rel="stylesheet" href="../../static/first/assets/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../static/first/assets/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../../static/first/assets/vendor/linearicons/style.css">
+	<link rel="stylesheet" href="../../static/first/assets/vendor/chartist/css/chartist-custom.css">
+	<!-- MAIN CSS -->
+	<link rel="stylesheet" href="../../static/first/assets/css/main.css">
+	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+	<link rel="stylesheet" href="../../static/first/assets/css/demo.css">
+	<!-- GOOGLE FONTS -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+	<!-- ICONS -->
+	<link rel="apple-touch-icon" sizes="76x76" href="../../static/first/assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="../../static/first/assets/img/favicon.jpg">
+</head>
+
+<body>
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<!-- NAVBAR -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="brand">
+				<a href="index.html"><img src="../../static/first/assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
+			</div>
+			<div class="container-fluid">
+				<div class="navbar-btn">
+					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+				</div>
+
+
+				<div id="navbar-menu">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+								<i class="lnr lnr-alarm"></i>
+								<span class="badge bg-danger">5</span>
+							</a>
+							<ul class="dropdown-menu notifications">
+								<li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space is almost full</a></li>
+								<li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9 unfinished tasks</a></li>
+								<li><a href="#" class="notification-item"><span class="dot bg-success"></span>Monthly report is available</a></li>
+								<li><a href="#" class="notification-item"><span class="dot bg-warning"></span>Weekly meeting in 1 hour</a></li>
+								<li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request has been approved</a></li>
+								<li><a href="#" class="more">See all notifications</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>Help</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Basic Use</a></li>
+								<li><a href="#">Working With Data</a></li>
+								<li><a href="#">Security</a></li>
+								<li><a href="#">Troubleshooting</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="../../static/first/assets/img/user.jpg" class="img-circle" alt="Avatar"> <span>Kim Jung Bin</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
+								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
+								<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
+								<li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+							</ul>
+						</li>
+						<!-- <li>
+							<a class="update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
+						</li> -->
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- END NAVBAR -->
+		<!-- LEFT SIDEBAR -->
+		<div id="sidebar-nav" class="sidebar">
+			<div class="sidebar-scroll">
+				<nav>
+					<ul class="nav">
+						<li><a href="{% url 'myinfo' %}" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+						<li><a href="{% url 'charts' %}" class="active"><i class="lnr lnr-chart-bars"></i> <span>Charts</span></a></li>
+						<li><a href="{% url 'page_profile' %}" class=""><i class="lnr lnr-file-empty"></i> <span>Profile</span></a></li>
+						<li><a href="{% url 'login' %}" class=""><i class="lnr lnr-file-empty"></i> <span>Login</span></a></li>
+						<li><a href="{% url 'tables' %}" class=""><i class="lnr lnr-dice"></i> <span>Tables</span></a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<!-- END LEFT SIDEBAR -->
+		<!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">Charts</h3>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">Confirmed Chart by Date</h3>
+								</div>
+								<div class="panel-body">
+									<div id="demo-line-chart" class="ct-chart"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">Entered Chart by Date</h3>
+								</div>
+								<div class="panel-body">
+									<div id="demo-area-chart" class="ct-chart"></div>
+								</div>
+							</div>
+						</div>
+{#						<div class="col-md-6">#}
+{#							<div class="panel">#}
+{#								<div class="panel-heading">#}
+{#									<h3 class="panel-title">Multiple Chart</h3>#}
+{#								</div>#}
+{#								<div class="panel-body">#}
+{#									<div id="multiple-chart" class="ct-chart"></div>#}
+{#								</div>#}
+{#							</div>#}
+{#						</div>#}
+					</div>
+                    <div class="row">
+                        <div class="col-md-6">
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">Place Visits</h3>
+								</div>
+								<div class="panel-body">
+									<div id="demo-bar-chart" class="ct-chart"></div>
+								</div>
+							</div>
+						</div>
+                        <div class="col-md-6">
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">Place Confirmed</h3>
+								</div>
+								<div class="panel-body">
+									<div id="bar-chart" class="ct-chart"></div>
+								</div>
+							</div>
+						</div>
+                    </div>
+				</div>
+			</div>
+			<!-- END MAIN CONTENT -->
+		</div>
+		<!-- END MAIN -->
+		<div class="clearfix"></div>
+		<footer>
+			<div class="container-fluid">
+				<p class="copyright">Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a>
+</p>
+			</div>
+		</footer>
+	</div>
+	<!-- END WRAPPER -->
+	<!-- Javascript -->
+	<script src="../../static/first/assets/vendor/jquery/jquery.min.js"></script>
+	<script src="../../static/first/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../../static/first/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="../../static/first/assets/vendor/chartist/js/chartist.min.js"></script>
+	<script src="../../static/first/assets/scripts/klorofil-common.js"></script>
+	<script>
+	$(function() {
+		var options;
+
+        var c01 = 0, c02 = 0, c03 = 0, c04 = 0, c05 = 0, c06 = 0, c07 = 0, c08 = 0, c09 = 0, c10 = 0;
+        var c11 = 0, c12 = 0, c13 = 0, c14 = 0, c15 = 0, c16 = 0, c17 = 0, c18 = 0, c19 = 0, c20 = 0;
+        var c21 = 0, c22 = 0, c23 = 0, c24 = 0, c25 = 0, c26 = 0, c27 = 0, c28 = 0, c29 = 0, c30 = 0;
+
+        {% for static01 in static01s %}
+            c01 += {{ static01.e87confirm }};
+            c01 += {{ static01.s41confirm }};
+        {% endfor %}
+        {% for static02 in static02s %}
+            c02 += {{ static02.e87confirm }};
+            c02 += {{ static02.s41confirm }};
+        {% endfor %}
+        {% for static03 in static03s %}
+            c03 += {{ static03.e87confirm }};
+            c03 += {{ static03.s41confirm }};
+        {% endfor %}
+        {% for static04 in static04s %}
+            c04 += {{ static04.e87confirm }};
+            c04 += {{ static04.s41confirm }};
+        {% endfor %}
+        {% for static05 in static05s %}
+            c05 += {{ static05.e87confirm }};
+            c05 += {{ static05.s41confirm }};
+        {% endfor %}
+        {% for static06 in static06s %}
+            c06 += {{ static06.e87confirm }};
+            c06 += {{ static06.s41confirm }};
+        {% endfor %}
+        {% for static07 in static07s %}
+            c07 += {{ static07.e87confirm }};
+            c07 += {{ static07.s41confirm }};
+        {% endfor %}
+        {% for static08 in static08s %}
+            c08 += {{ static08.e87confirm }};
+            c08 += {{ static08.s41confirm }};
+        {% endfor %}
+        {% for static09 in static09s %}
+            c09 += {{ static09.e87confirm }};
+            c09 += {{ static09.s41confirm }};
+        {% endfor %}
+        {% for static10 in static10s %}
+            c10 += {{ static10.e87confirm }};
+            c10 += {{ static10.s41confirm }};
+        {% endfor %}
+        {% for static11 in static11s %}
+            c11 += {{ static11.e87confirm }};
+            c11 += {{ static11.s41confirm }};
+        {% endfor %}
+        {% for static12 in static12s %}
+            c12 += {{ static12.e87confirm }};
+            c12 += {{ static12.s41confirm }};
+        {% endfor %}
+        {% for static13 in static13s %}
+            c13 += {{ static13.e87confirm }};
+            c13 += {{ static13.s41confirm }};
+        {% endfor %}
+        {% for static14 in static14s %}
+            c14 += {{ static14.e87confirm }};
+            c14 += {{ static14.s41confirm }};
+        {% endfor %}
+        {% for static15 in static15s %}
+            c15 += {{ static15.e87confirm }};
+            c15 += {{ static15.s41confirm }};
+        {% endfor %}
+        {% for static16 in static16s %}
+            c16 += {{ static16.e87confirm }};
+            c16 += {{ static16.s41confirm }};
+        {% endfor %}
+        {% for static17 in static17s %}
+            c17 += {{ static17.e87confirm }};
+            c17 += {{ static17.s41confirm }};
+        {% endfor %}
+        {% for static18 in static18s %}
+            c18 += {{ static18.e87confirm }};
+            c18 += {{ static18.s41confirm }};
+        {% endfor %}
+        {% for static19 in static19s %}
+            c19 += {{ static19.e87confirm }};
+            c19 += {{ static19.s41confirm }};
+        {% endfor %}
+        {% for static20 in static20s %}
+            c20 += {{ static20.e87confirm }};
+            c20 += {{ static20.s41confirm }};
+        {% endfor %}
+        {% for static21 in static21s %}
+            c21 += {{ static21.e87confirm }};
+            c21 += {{ static21.s41confirm }};
+        {% endfor %}
+        {% for static22 in static22s %}
+            c22 += {{ static22.e87confirm }};
+            c22 += {{ static22.s41confirm }};
+        {% endfor %}
+        {% for static23 in static23s %}
+            c23 += {{ static23.e87confirm }};
+            c23 += {{ static23.s41confirm }};
+        {% endfor %}
+        {% for static24 in static24s %}
+            c24 += {{ static24.e87confirm }};
+            c24 += {{ static24.s41confirm }};
+        {% endfor %}
+        {% for static25 in static25s %}
+            c25 += {{ static25.e87confirm }};
+            c25 += {{ static25.s41confirm }};
+        {% endfor %}
+        {% for static26 in static26s %}
+            c26 += {{ static26.e87confirm }};
+            c26 += {{ static26.s41confirm }};
+        {% endfor %}
+        {% for static27 in static27s %}
+            c27 += {{ static27.e87confirm }};
+            c27 += {{ static27.s41confirm }};
+        {% endfor %}
+        {% for static28 in static28s %}
+            c28 += {{ static28.e87confirm }};
+            c28 += {{ static28.s41confirm }};
+        {% endfor %}
+        {% for static29 in static29s %}
+            c29 += {{ static29.e87confirm }};
+            c29 += {{ static29.s41confirm }};
+        {% endfor %}
+        {% for static30 in static30s %}
+            c30 += {{ static30.e87confirm }};
+            c30 += {{ static30.s41confirm }};
+        {% endfor %}
+
+		var data = {
+			labels: ['11/1', '11/2', '11/3', '11/4', '11/5', '11/6', '11/7', '11/8', '11/9', '11/10', '11/11', '11/12',
+                '11/13', '11/14', '11/15','11/16', '11/17', '11/18', '11/19', '11/20', '11/21', '11/22', '11/23',
+                '11/24', '11/25', '11/26', '11/27', '11/28', '11/29', '11/30'],
+			series: [
+				[c01, c02, c03, c04, c05, c06, c07, c08, c09, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20,
+                 c21, c22, c23, c24, c25, c26, c27, c28, c29, c30],
+			]
+		};
+
+		// line chart
+		options = {
+			height: "300px",
+			showPoint: true,
+			axisX: {
+				showGrid: false
+			},
+			lineSmooth: false,
+		};
+
+		new Chartist.Line('#demo-line-chart', data, options);
+
+        var options;
+
+        var e01 = 0, e02 = 0, e03 = 0, e04 = 0, e05 = 0, e06 = 0, e07 = 0, e08 = 0, e09 = 0, e10 = 0;
+        var e11 = 0, e12 = 0, e13 = 0, e14 = 0, e15 = 0, e16 = 0, e17 = 0, e18 = 0, e19 = 0, e20 = 0;
+        var e21 = 0, e22 = 0, e23 = 0, e24 = 0, e25 = 0, e26 = 0, e27 = 0, e28 = 0, e29 = 0, e30 = 0;
+
+        {% for static01 in static01s %}
+            e01 += {{ static01.e87enter }};
+            e01 += {{ static01.s41enter }};
+        {% endfor %}
+        {% for static02 in static02s %}
+            e02 += {{ static02.e87enter }};
+            e02 += {{ static02.s41enter }};
+        {% endfor %}
+        {% for static03 in static03s %}
+            e03 += {{ static03.e87enter }};
+            e03 += {{ static03.s41enter }};
+        {% endfor %}
+        {% for static04 in static04s %}
+            e04 += {{ static04.e87enter }};
+            e04 += {{ static04.s41enter }};
+        {% endfor %}
+        {% for static05 in static05s %}
+            e05 += {{ static05.e87enter }};
+            e05 += {{ static05.s41enter }};
+        {% endfor %}
+        {% for static06 in static06s %}
+            e06 += {{ static06.e87enter }};
+            e06 += {{ static06.s41enter }};
+        {% endfor %}
+        {% for static07 in static07s %}
+            e07 += {{ static07.e87enter }};
+            e07 += {{ static07.s41enter }};
+        {% endfor %}
+        {% for static08 in static08s %}
+            e08 += {{ static08.e87enter }};
+            e08 += {{ static08.s41enter }};
+        {% endfor %}
+        {% for static09 in static09s %}
+            e09 += {{ static09.e87enter }};
+            e09 += {{ static09.s41enter }};
+        {% endfor %}
+        {% for static10 in static10s %}
+            e10 += {{ static10.e87enter }};
+            e10 += {{ static10.s41enter }};
+        {% endfor %}
+        {% for static11 in static11s %}
+            e11 += {{ static11.e87enter }};
+            e11 += {{ static11.s41enter }};
+        {% endfor %}
+        {% for static12 in static12s %}
+            e12 += {{ static12.e87enter }};
+            e12 += {{ static12.s41enter }};
+        {% endfor %}
+        {% for static13 in static13s %}
+            e13 += {{ static13.e87enter }};
+            e13 += {{ static13.s41enter }};
+        {% endfor %}
+        {% for static14 in static14s %}
+            e14 += {{ static14.e87enter }};
+            e14 += {{ static14.s41enter }};
+        {% endfor %}
+        {% for static15 in static15s %}
+            e15 += {{ static15.e87enter }};
+            e15 += {{ static15.s41enter }};
+        {% endfor %}
+        {% for static16 in static16s %}
+            e16 += {{ static16.e87enter }};
+            e16 += {{ static16.s41enter }};
+        {% endfor %}
+        {% for static17 in static17s %}
+            e17 += {{ static17.e87enter }};
+            e17 += {{ static17.s41enter }};
+        {% endfor %}
+        {% for static18 in static18s %}
+            e18 += {{ static18.e87enter }};
+            e18 += {{ static18.s41enter }};
+        {% endfor %}
+        {% for static19 in static19s %}
+            e19 += {{ static19.e87enter}};
+            e19 += {{ static19.s41enter }};
+        {% endfor %}
+        {% for static20 in static20s %}
+            e20 += {{ static20.e87enter }};
+            e20 += {{ static20.s41enter }};
+        {% endfor %}
+        {% for static21 in static21s %}
+            e21 += {{ static21.e87enter }};
+            e21 += {{ static21.s41enter }};
+        {% endfor %}
+        {% for static22 in static22s %}
+            e22 += {{ static22.e87enter }};
+            e22 += {{ static22.s41enter }};
+        {% endfor %}
+        {% for static23 in static23s %}
+            e23 += {{ static23.e87enter }};
+            e23 += {{ static23.s41enter }};
+        {% endfor %}
+        {% for static24 in static24s %}
+            e24 += {{ static24.e87enter }};
+            e24 += {{ static24.s41enter }};
+        {% endfor %}
+        {% for static25 in static25s %}
+            e25 += {{ static25.e87enter }};
+            e25 += {{ static25.s41enter }};
+        {% endfor %}
+        {% for static26 in static26s %}
+            e26 += {{ static26.e87enter }};
+            e26 += {{ static26.s41enter }};
+        {% endfor %}
+        {% for static27 in static27s %}
+            e27 += {{ static27.e87enter }};
+            e27 += {{ static27.s41enter }};
+        {% endfor %}
+        {% for static28 in static28s %}
+            e28 += {{ static28.e87enter }};
+            e28 += {{ static28.s41enter }};
+        {% endfor %}
+        {% for static29 in static29s %}
+            e29 += {{ static29.e87enter }};
+            e29 += {{ static29.s41enter }};
+        {% endfor %}
+        {% for static30 in static30s %}
+            e30 += {{ static30.e87enter }};
+            e30 += {{ static30.s41enter }};
+        {% endfor %}
+
+		var data = {
+			labels: ['11/1', '11/2', '11/3', '11/4', '11/5', '11/6', '11/7', '11/8', '11/9', '11/10', '11/11', '11/12',
+                '11/13', '11/14', '11/15','11/16', '11/17', '11/18', '11/19', '11/20', '11/21', '11/22', '11/23',
+                '11/24', '11/25', '11/26', '11/27', '11/28', '11/29', '11/30'],
+			series: [
+				[e01, e02, e03, e04, e05, e06, e07, e08, e09, e10, e11, e12, e13, e14, e15, e16, e17, e18, e19, e20,
+                 e21, e22, e23, e24, e25, e26, e27, e28, e29, e30],
+			]
+		};
+
+		// area chart
+		options = {
+			height: "270px",
+			showArea: true,
+			showLine: false,
+			showPoint: false,
+			axisX: {
+				showGrid: false
+			},
+			lineSmooth: false,
+		};
+
+		new Chartist.Line('#demo-area-chart', data, options);
+
+		var v1 = 0, v2 = 0;
+		{% for static in staticss %}
+            v1 += {{ static.e87enter }};
+            v2 += {{ static.s41enter }};
+        {% endfor %}
+		// bar chart
+		var data = {
+			labels: ['e8-7', 's4-1', 'e8-1', 'N14', 'e3-1', 'e2', 'e3'],
+			series: [
+				[v1, v2, 154371, 127641, 139581, 150681, 176541]
+			]
+		};
+
+		var options = {
+			height: 300,
+			axisX: {
+				showGrid: false
+			},
+		};
+
+		new Chartist.Bar('#demo-bar-chart', data, options);
+
+		var vc1 = 0, vc2 = 0;
+		{% for static in staticss %}
+            vc1 += {{ static.e87confirm }};
+            vc2 += {{ static.s41confirm }};
+        {% endfor %}
+		// bar chart
+		var data = {
+			labels: ['e8-7', 's4-1', 'e8-1', 'N14', 'e3-1', 'e2', 'e3'],
+			series: [
+				[vc1, vc2, 1543, 1276, 1395, 1506, 1765]
+			]
+		};
+
+		var options = {
+			height: 300,
+			axisX: {
+				showGrid: false
+			},
+		};
+
+		new Chartist.Bar('#bar-chart', data, options);
+
+
+		// multiple chart
+		var data = {
+			labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+			series: [{
+				name: 'series-real',
+				data: [200, 380, 350, 320, 410, 450, 570, 400, 555, 620, 750, 900],
+			}, {
+				name: 'series-projection',
+				data: [240, 350, 360, 380, 400, 450, 480, 523, 555, 600, 700, 800],
+			}]
+		};
+
+		var options = {
+			fullWidth: true,
+			lineSmooth: false,
+			height: "270px",
+			low: 0,
+			high: 'auto',
+			series: {
+				'series-projection': {
+					showArea: true,
+					showPoint: false,
+					showLine: false
+				},
+			},
+			axisX: {
+				showGrid: false,
+
+			},
+			axisY: {
+				showGrid: false,
+				onlyInteger: true,
+				offset: 0,
+			},
+			chartPadding: {
+				left: 20,
+				right: 20
+			}
+		};
+
+		new Chartist.Line('#multiple-chart', data, options);
+
+	});
+	</script>
+</body>
+
+</html>
