@@ -2,7 +2,8 @@
 소프트웨어학부 졸업작품 git
 
 
-모션 캡쳐를 이용한 헬스케어 키오스크 시스템
+모션 캡쳐를 이용한 헬스케어 키오스크 시스템.version1
+(E-R diagram + 부분 GUI 설계 및 실행 완료)
 
 main  페이지
 ![KakaoTalk_20201130_165841111](https://user-images.githubusercontent.com/38103094/100697965-ab9cd000-33da-11eb-97c7-989cd18d4101.jpg)
