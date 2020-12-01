@@ -20,4 +20,5 @@ main  페이지
 
 
 
-
+완성된 E-R Diagram
+![캡처](https://user-images.githubusercontent.com/38103094/100729871-aa849680-340c-11eb-825d-fce2303ce0cd.PNG)
